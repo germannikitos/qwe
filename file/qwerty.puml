@@ -1,1 +1,45 @@
-@startumlBob -> Alice: Hello!@enduml
+@startuml Ozon_BY_UseCase
+left to right direction
+skinparam packageStyle rectangle
+
+title Ozon Беларусь — варианты использования
+
+actor "Клиент" as Client
+actor "Поставщик" as Supplier
+actor "Белпочта" as Belpochta
+actor "Банк" as Bank
+
+rectangle "Маркетплейс Ozon (BY)" {
+
+  usecase "Смотреть каталог" as UC1
+  usecase "Оформить заказ\nс BY-склада" as UC2
+  usecase "Оплатить заказ" as UC3
+  usecase "Отследить доставку" as UC4
+  usecase "Управлять товарами" as UC5
+  usecase "Обработать заказ" as UC6
+  usecase "Доставить посылку" as UC7
+
+  usecase "Оплата через\nбелорусские системы" as UC8
+  usecase "Рассрочка от банка" as UC9
+  usecase "Трекинг Белпочты" as UC10
+}
+
+Client --> UC1
+Client --> UC2
+Client --> UC3
+Client --> UC4
+
+Supplier --> UC5
+Supplier --> UC6
+
+Belpochta --> UC7
+Bank --> UC3
+
+UC8 ..> UC3 : <<extend>>
+UC9 ..> UC3 : <<extend>>
+UC10 ..> UC4 : <<extend>>
+
+UC2 ..> UC3 : <<include>>
+UC7 ..> UC4 : <<include>>
+
+@enduml
